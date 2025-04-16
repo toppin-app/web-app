@@ -1,0 +1,11 @@
+stages:
+  - check
+
+check:
+  stage: check
+  image: node
+  script:
+    - npm install
+    - npm run build
+  except:
+    - develop
