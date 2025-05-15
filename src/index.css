@@ -1,0 +1,82 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 325 80% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 240 5% 10%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+
+    --radius: 1.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .neo-blur {
+    @apply backdrop-blur-md bg-black/30 border border-white/10;
+  }
+  
+  .candy-button {
+    @apply bg-toppin-pink text-white font-semibold rounded-full py-3 px-6 hover:bg-opacity-90 transition-all;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-toppin-pink to-toppin-purple;
+  }
+  
+  .candy-shadow {
+    box-shadow: 0 8px 32px rgba(233, 69, 135, 0.2);
+  }
+  
+  .phone-mockup {
+    @apply rounded-[40px] overflow-hidden border-8 border-gray-800;
+    box-shadow: 0 11px 25px -5px rgba(0, 0, 0, 0.4), 
+                inset 0 -3px 6px rgba(255, 255, 255, 0.1), 
+                0 3px 15px rgba(0, 0, 0, 0.4);
+  }
+}

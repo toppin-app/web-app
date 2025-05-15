@@ -1,35 +1,35 @@
-# Etapa de Build
+# Stage 1: Build the application
 FROM node:18-alpine AS builder
 
+# Set the working directory
 WORKDIR /app
 
+# Copy package files and install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm ci --omit=dev
 
+# Copy the rest of the application code
 COPY . .
 
+# Build the application
 RUN npm run build
 
-# Etapa de Producción
-FROM node:18-alpine
+# Stage 2: Run the application
+FROM node:18-alpine AS runner
 
-ENV NODE_ENV=production
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
+# Set the working directory
 WORKDIR /app
 
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/public ./public
+# Copy built files from the builder stage
 COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./
 
-RUN chown -R nextjs:nodejs ./.next
-USER nextjs
+# Install only production dependencies
+RUN npm ci --omit=dev
 
-EXPOSE 3000
-ENV PORT 3000
-ENV HOSTNAME "localhost"
+# Expose the port the app runs on
+EXPOSE 80
 
-CMD ["node", ".next/standalone/server.js"]
+# Run the Next.js application
+CMD ["npm", "run", "start"]
